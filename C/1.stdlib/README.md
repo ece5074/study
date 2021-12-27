@@ -1,4 +1,6 @@
 # stdlib 재현해보기
+    gcc version 4.8.5
+    CentOS7-WSL
 ### 컴파일
     make clean;make all
 
