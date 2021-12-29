@@ -1,0 +1,3 @@
+# remove result for compile
+*.so*
+*.o
