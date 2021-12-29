@@ -259,8 +259,7 @@ double atof(const char *__nptr)
             nFlag = 1;
         }
         else if(*tmp == 0) break;
-
-        else break;
+        else return 0.000f;
 
         tmp ++;
     }
