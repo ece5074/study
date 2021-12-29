@@ -5,7 +5,7 @@ VERSION = 0.0.1
 it: all
 CC = cc
 
-INC = -I. -I/home/wideshot/study/include
+INC = -I. -I./include
 LIBRARY = -lpthread
 CFLAGS = -g -Wall -DDEBUG -fPIC -Werror
 LDFLAGS = -L. \
