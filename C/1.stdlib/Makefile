@@ -15,8 +15,8 @@ OBJS = mystdlib.o
 ALL_TARGET = libmystdlib.so.*
 TARGET = libmystdlib.so.$(VERSION)
 
-SRCS2 = main.c test/memoryTest.c test/stringTest.c
-OBJS2 = main.o test/memoryTest.o test/stringTest.o
+SRCS2 = main.c test/memoryTest.c test/stringTest.c test/essenceTest.c test/common.c
+OBJS2 = main.o test/memoryTest.o test/stringTest.o test/essenceTest.o test/common.o
 TARGET2 = main
 
 all: $(TARGET) $(TARGET2)
