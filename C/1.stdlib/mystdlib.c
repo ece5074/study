@@ -153,16 +153,138 @@ int abs(const int n)
     return n;
 }
 
+div_t div(const int __num, const int __div)
+{
+    div_t ret = {0};
+    if(!__div) return ret;
+    ret.rem = __num % __div;
+    ret.quot = (__num - ret.rem) / __div;
+
+    return ret;
+}
+
+long labs(const long n)
+{
+    if(n < 0) return n * -1;
+
+    return n;
+}
+
+ldiv_t ldiv(const long __num, const long __div)
+{
+    ldiv_t ret = {0};
+    if(!__div) return ret;
+    ret.rem = __num % __div;
+    ret.quot = (__num - ret.rem) / __div;
+
+    return ret;
+}
+
+long atol(const char *__nptr)
+{
+    unsigned long ret = 0;
+    short pFlag = 1;
+    unsigned long __LONG_MAX_VALUE__ = __LONG_MAX__;
+
+    char *tmp = (char *)__nptr;
+
+    while(tmp)
+    {
+        if(*tmp >= 48 && *tmp <= 57)
+        {
+            ret *= 10;
+            if(__LONG_MAX_VALUE__ - ((long)*tmp - 48) < ret) return 0;
+            ret = ret + ((long)*tmp - 48);
+        }
+        else if(*tmp == 32)
+        {
+            if(ret) break;
+        }
+        else if(*tmp == 43 || *tmp == 45)// + -
+        {
+            if(ret) return 0;
+            if(*tmp == 45) {
+                __LONG_MAX_VALUE__ = (unsigned long)__LONG_MAX__ + 1;
+                pFlag = -1;
+            }
+        }
+        else if(*tmp == 0) break;
+        else return 0;
+
+        tmp ++;
+    }
+
+    return ret * pFlag;
+}
+
+/* char to double */
 double atof(const char *__nptr)
 {
-    return 1.000;
+    unsigned int exponent = 0, mantissa = 0;
+    double rmantissa, ret = 0.000;
+    short pFlag = 1;
+    short nFlag = 0;
+
+    char *tmp = (char *)__nptr;
+
+    while(tmp)
+    {
+        if(*tmp >= 48 && *tmp <= 57)
+        {
+            if(!nFlag)
+            {
+                exponent *= 10;
+                exponent = abs(exponent) + ((int)*tmp - 48);
+            }
+            else
+            {
+                mantissa *= 10;
+                mantissa = abs(mantissa) + ((int)*tmp - 48);
+            }
+        }
+        else if(*tmp == 32)
+        {
+            if(exponent || mantissa) break;
+        }
+        else if(*tmp == 43 || *tmp == 45)// + -
+        {
+            if(exponent || mantissa) return 0;
+            if(*tmp == 45)
+            {
+                pFlag = -1;
+            }
+        }
+        else if(*tmp == 46)
+        {
+            nFlag = 1;
+        }
+        else if(*tmp == 0) break;
+
+        else break;
+
+        tmp ++;
+    }
+
+    if(mantissa > 0)
+    {
+        rmantissa = (double)mantissa;
+        while(1)
+        {
+            if(rmantissa < 1.000f) break;
+            rmantissa /= 10;
+        }
+    }
+
+    ret = exponent + rmantissa;
+    return ret * pFlag;
 }
 
 /* char to int */
 int atoi(const char *__nptr)
 {
     unsigned int ret = 0;
-    int pFlag = 1; //positive num = 1, negative num = -1
+    unsigned int __INT_MAX_VALUE__ = __INT_MAX__;
+    short pFlag = 1; //positive num = 1, negative num = -1
     char *tmp = (char *)__nptr;
 
     while(tmp)
@@ -170,18 +292,19 @@ int atoi(const char *__nptr)
         if(*tmp >= 48 && *tmp <= 57)   // 0~9
         {  
             ret *= 10;
-            if(ret + ((int)*tmp - 48) > __INT_MAX__) return 0;
-            ret = abs(ret) + ((int)*tmp - 48);
+            if(ret + ((int)*tmp - 48) > __INT_MAX_VALUE__) return 0;
+            ret = ret + ((int)*tmp - 48);
         }
-        else if(*tmp == 32)
+        else if(*tmp == 32)//space bar
         {
-            if(ret) return ret * pFlag;
-        } //space bar
+            if(ret) break;
+        } 
         else if(*tmp == 43 || *tmp == 45)// + -
         {
             if(ret) return 0;
             if(*tmp == 45)
             {
+                __INT_MAX_VALUE__ = ((unsigned int)__INT_MAX__ + 1);
                 pFlag = -1;
             }
         }
