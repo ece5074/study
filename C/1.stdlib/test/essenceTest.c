@@ -71,7 +71,7 @@ int divTest()
     }
 
     rxt = div(2147483647, -2147483648);
-    if(rxt.rem != 2147483647);
+    if(rxt.rem != __INT_MAX__)
     {
         if(!rxt.quot) return 1;
         log(FAIL, rxt.quot);

@@ -11,5 +11,6 @@ int main(void)
 {
     stringTest();
     essenceTest();
+    memoryTest();
     return 1;
 }
