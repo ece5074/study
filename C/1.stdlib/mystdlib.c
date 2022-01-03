@@ -165,9 +165,7 @@ div_t div(const int __num, const int __div)
 
 long labs(const long n)
 {
-    if(n < 0) return n * -1;
-
-    return n;
+    return n >= 0 ? n : -n;
 }
 
 ldiv_t ldiv(const long __num, const long __div)
@@ -315,4 +313,14 @@ int atoi(const char *__nptr)
     }
 
     return ret * pFlag;
+}
+
+void abort(void)
+{
+    exit(0);
+}
+
+int atexit(void (*function) (void))
+{
+    return 1;
 }

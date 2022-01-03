@@ -7,8 +7,21 @@
 
 */
 
+void helloworld(void)
+{
+    printf("Hello World!!\n");
+}
+
+void byeworld(void)
+{
+    printf("bye World!!\n");
+}
+
 int main(void)
 {
+    printf("Start Test pid: [%d]\n", getpid());
+    atexit(helloworld);
+    atexit(byeworld);
     stringTest();
     essenceTest();
     memoryTest();
