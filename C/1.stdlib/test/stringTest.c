@@ -22,6 +22,12 @@ void stringTest()
     {
         fprintf(stdout, "[atol] %s\n", SUCCESS);
     }
+
+    rxt = strtodTest();
+    if(rxt)
+    {
+        fprintf(stdout, "[strtod] %s\n", SUCCESS);
+    }
 }
 
 
@@ -154,6 +160,27 @@ int atolTest()
     if(ret != -9223372036854775808UL)
     {
         log(FAIL, ret);
+        return 0;
+    }
+
+    return 1;
+}
+
+int strtodTest()
+{
+    char *retstr;
+    double ret;
+
+    char *str;
+
+    retstr = malloc(sizeof(500));
+
+    str = "     -92.222451 abcded";
+    ret = strtod(str, &retstr);
+    if(ret != -9222.222451f && strncmp(retstr, "abcded", 6))
+    {
+        log(FAIL, ret);
+        printf("retstr: %s\n", retstr);
         return 0;
     }
 

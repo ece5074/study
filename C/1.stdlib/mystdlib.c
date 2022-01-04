@@ -148,9 +148,7 @@ void *realloc(void *block, size_t size)
 
 int abs(const int n)
 {
-    if(n < 0) return n * -1;
-
-    return n;
+    return n >= 0 ? n : -n;
 }
 
 div_t div(const int __num, const int __div)
@@ -313,6 +311,63 @@ int atoi(const char *__nptr)
     }
 
     return ret * pFlag;
+}
+
+double strtod(const char *__nptr, char **__endptr)
+{
+    double rxt;
+    int loop = -1, pos;
+    short numberFlag = 1, dotFlag = 1;
+    if(__nptr == NULL) return 0.00f;
+
+    char *tmp = (char *)__nptr;
+    char strnum[512];
+    memset(strnum, 0x00, sizeof(strnum));
+
+    while(tmp)
+    {
+        loop ++;
+        if(*tmp >= '0' && *tmp <= '9')
+        {
+            numberFlag == 1 ? numberFlag = 0 : numberFlag;
+        }
+        else if(*tmp == ' ')
+        {
+
+        }
+        else if(*tmp == '.')
+        {
+            if(!dotFlag)
+            {
+                pos = loop;
+                break;
+            }
+            dotFlag == 1 ? dotFlag = 0 : dotFlag;
+        }
+        else if (*tmp == '+' || *tmp == '-')
+        {
+            if(!numberFlag)
+            {
+                pos = loop;
+                break;
+            }
+            numberFlag == 1 ? numberFlag = 0 : numberFlag;
+        }
+        else 
+        {
+            pos = loop;
+            break;
+        }
+        tmp ++;
+    }
+
+    strncpy(strnum, (char *)__nptr, pos);
+    strnum[strlen(strnum)] = '\0';
+    strncpy(*__endptr, tmp, strlen(__nptr) - pos);
+
+    rxt = atof(strnum);
+
+    return rxt;
 }
 
 void abort(void)

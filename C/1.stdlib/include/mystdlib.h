@@ -48,8 +48,8 @@ ldiv_t ldiv(const long __num, const long __div); /* divide num (long) */
 double atof(const char *__nptr); //char to double
 int atoi(const char *__nptr); //char to int
 long atol(const char *__nptr); //char to long
-double strtod(const char *__nptr, const char **__endptr); //char to double & divide char
-long int strtol(const char *__nptr, const char **__endptr); //char to long & divide char
+double strtod(const char *__nptr, char **__endptr); //char to double & divide char
+long int strtol(const char *__nptr, char **__endptr); //char to long & divide char
 unsigned long int stroul(const char *__nptr, const char **__endptr); //char to unsigned long & divide char
 
 /* search and sorting functions */
