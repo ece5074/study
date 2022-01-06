@@ -370,6 +370,54 @@ double strtod(const char *__nptr, char **__endptr)
     return rxt;
 }
 
+long int strtol(const char *__nptr, char **__endptr)
+{
+    long rxt;
+    int loop = -1, pos;
+    short numberFlag = 1;
+
+    char *tmp = (char *)__nptr;
+    char strnum[512];
+
+    memset(strnum, 0x00, sizeof(strnum));
+
+    if(__nptr == NULL) return 0;
+
+    while(tmp)
+    {
+        loop++;
+        if(*tmp >= '0' && *tmp <= '9')
+        {
+            numberFlag == 1 ? numberFlag = 0 : numberFlag;
+        }
+        else if(*tmp == ' ')
+        {
+
+        }
+        else if(*tmp == '+' || *tmp == '-')
+        {
+            if(numberFlag == 0) break;
+            numberFlag == 1 ? numberFlag = 0 : numberFlag;
+        }
+        else
+        {
+            pos = loop;
+            break;
+        }
+
+        tmp++;
+    }
+
+    strncpy(strnum, (char *)__nptr, pos);
+    rxt = atol(strnum);
+
+    strncpy(*__endptr, (char *)__nptr + pos, strlen(__nptr) - pos);
+
+    return rxt;
+
+    return rxt;
+}
+
 void abort(void)
 {
     exit(0);

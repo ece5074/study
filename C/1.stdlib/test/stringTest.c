@@ -28,6 +28,12 @@ void stringTest()
     {
         fprintf(stdout, "[strtod] %s\n", SUCCESS);
     }
+
+    rxt = strtolTest();
+    if(rxt)
+    {
+        fprintf(stdout, "[strtol] %s\n", SUCCESS);
+    }
 }
 
 
@@ -177,12 +183,34 @@ int strtodTest()
 
     str = "     -92.222451 abcded";
     ret = strtod(str, &retstr);
-    if(ret != -9222.222451f && strncmp(retstr, "abcded", 6))
+    if(ret != -9222.222451f && strcmp(retstr, "abcded"))
     {
         log(FAIL, ret);
         printf("retstr: %s\n", retstr);
         return 0;
     }
+
+    return 1;
+}
+
+int strtolTest()
+{
+    char *retstr;
+    long int ret;
+
+    char *str;
+
+    retstr = malloc(sizeof(512));
+
+    str = "           -293415181345 agaobaq";
+    ret = strtol(str, &retstr);
+    if(ret != -293415181345 && strcmp(retstr, "agaobaq"))
+    {
+        log(FAIL, ret);
+        printf("restr: %s\n", retstr);
+        return 0;
+    }
+    
 
     return 1;
 }
