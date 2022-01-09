@@ -12,12 +12,12 @@
     [참조: https://arjunsreedharan.org/post/148675821737/write-a-simple-memory-allocator]
     
 ## 문자열 변환 함수
-    atof: char to double
-    atoi: char to int
-    atol: char to long
-    strtod: char to double
-    strtol: char to long
-    stroul: char to unsigned long
+    atof: char* 타입을 double로 반환
+    atoi: char* 타입을 int로 반환
+    atol: char* 타입을 long으로 반환
+    strtod: char* 타입을 double로 반환 + __endptr로 입력받은 값에는 그 외 문자열을 반환
+    strtol: char* 타입을 int로 반환 + __endptr로 입력받은 값에는 그 외 문자열을 반
+    stroul: char* 타입을 long으로 반환 + __endptr로 입력받은 값에는 그 외 문자열을 반
 
 ## 난수 생성 함수
     rand: 난수 생성
